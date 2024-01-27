@@ -96,6 +96,10 @@ app.get("/api/products", async (req, res) => {
     const products = await Product.find();
     if (products) {
       res.status(200).json(products);
+      res.header(
+        "Access-Control-Allow-Origin",
+        "https://65b536ce52f5380008c3cc41--marktio.netlify.app"
+      );
       // console.log("All Product found", products)
     }
   } catch (err) {
