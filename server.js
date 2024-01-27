@@ -36,7 +36,7 @@ const reduceQuantityRoute = require("./routes/reduceQuantityRoute");
 const getQuantityRoute = require("./routes/getQuantityRoute");
 
 const app = express();
-const port = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5000;
 
 // middleware to parse json in the request body
 app.use(bodyParser.json());
@@ -62,11 +62,18 @@ app.use("/api", reduceQuantityRoute);
 app.use("/api", getQuantityRoute);
 
 //connect to mongodb database
-const dbURI = process.env.dbString;
-mongoose.connect(dbURI).then(() => {
-  console.log("connected to database");
-  app.listen(port, console.log(`server listening on port ${port}`));
-});
+const dbURI = process.env.MONGO_URI;
+
+const connectDB = async () => {
+  try {
+    const conn = mongoose.connect(dbURI).then(() => {
+      console.log(`MongoDB connected: ${conn.connection}`);
+    });
+  } catch (err) {
+    console.log("Failed to connect to mongodb", err, err.message);
+    process.exit(1);
+  }
+};
 
 // create a new product in the products collection....route
 app.post("/api/addproduct", async (req, res) => {
@@ -196,4 +203,10 @@ app.put("/api/updateProduct/:id", async (req, res) => {
       .status(500)
       .json({ error: "Failed to update product", message: err.message });
   }
+});
+
+connectDB().then(() => {
+  app.listen(PORT, () => {
+    console.log(`server listening on port ${PORT}`);
+  });
 });
