@@ -40,6 +40,7 @@ const PORT = process.env.PORT || 5000;
 
 // middleware to parse json in the request body
 app.use(bodyParser.json());
+app.options("*", cors()); // Enable preflight requests for all routes
 
 // Enable CORS for for all routes
 app.use(cors());
@@ -68,6 +69,7 @@ const connectDB = async () => {
   try {
     const conn = mongoose.connect(process.env.MONGO_URI).then(() => {
       console.log(`MongoDB connected: ${conn.connection}`);
+      console.log(process.env.MONGO_URI);
     });
   } catch (err) {
     console.log("Failed to connect to mongodb", err, err.message);
