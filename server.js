@@ -66,7 +66,7 @@ const dbURI = process.env.MONGO_URI;
 
 const connectDB = async () => {
   try {
-    const conn = mongoose.connect(dbURI).then(() => {
+    const conn = mongoose.connect(process.env.MONGO_URI).then(() => {
       console.log(`MongoDB connected: ${conn.connection}`);
     });
   } catch (err) {
