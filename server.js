@@ -44,7 +44,9 @@ app.options("*", cors()); // Enable preflight requests for all routes
 
 // Enable CORS for for all routes
 app.use(
-  cors({ origin: "https://65b536ce52f5380008c3cc41--marktio.netlify.app" })
+  cors({
+    origin: "https://65b536ce52f5380008c3cc41--marktio.netlify.app",
+  })
 );
 
 // use routes files
