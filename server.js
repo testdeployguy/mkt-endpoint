@@ -43,7 +43,9 @@ app.use(bodyParser.json());
 app.options("*", cors()); // Enable preflight requests for all routes
 
 // Enable CORS for for all routes
-app.use(cors());
+app.use(
+  cors({ origin: "https://65b536ce52f5380008c3cc41--marktio.netlify.app" })
+);
 
 // use routes files
 app.use("/api", signUpRoute);
@@ -96,10 +98,6 @@ app.get("/api/products", async (req, res) => {
     const products = await Product.find();
     if (products) {
       res.status(200).json(products);
-      res.header(
-        "Access-Control-Allow-Origin",
-        "https://65b536ce52f5380008c3cc41--marktio.netlify.app"
-      );
       // console.log("All Product found", products)
     }
   } catch (err) {
