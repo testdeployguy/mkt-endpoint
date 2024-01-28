@@ -153,17 +153,19 @@ app.get("/api/productsDeployed", async (req, res) => {
 });
 
 // Get specific product details where deploy property is true from the database....route
-app.get("/api/deployedProductDetail/:id", async (req, res) => {
+app.get("/api/deployedProductDetail/:productId", async (req, res) => {
   try {
-    const productId = req.params.id;
+    const productId = req.params.productId;
     const product = await Product.findOne({ _id: productId });
-    if (product.deploy === true) {
+    const productDeployed = product.deploy;
+    if (productDeployed) {
       console.log("Product found", product);
       res.status(200).json(product);
-    } else {
-      console.log("Product not found");
-      res.status(404).json({ message: "product not found" });
     }
+    // else {
+    //   console.log("Product not found");
+    //   res.status(409).json({ message: "product not found" });
+    // }
   } catch (err) {
     console.log("Error getting product:", err.message);
     res.status(500).json({ message: "Internal Server Error" });
