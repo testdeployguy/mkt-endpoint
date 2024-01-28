@@ -72,8 +72,8 @@ const dbURI = process.env.MONGO_URI;
 const connectDB = async () => {
   try {
     const conn = mongoose.connect(process.env.MONGO_URI).then(() => {
-      console.log(`MongoDB connected: ${conn.connection}`);
-      console.log(process.env.MONGO_URI);
+      console.log(`MongoDB connected`);
+      // console.log(process.env.MONGO_URI);
     });
   } catch (err) {
     console.log("Failed to connect to mongodb", err, err.message);
@@ -158,7 +158,7 @@ app.get("/api/deployedProductDetail/:id", async (req, res) => {
     const productId = req.params.id;
     const product = await Product.findById(productId);
     if (product.deploy === true) {
-      // console.log("Product found", product);
+      console.log("Product found", product);
       res.status(200).json(product);
     } else {
       console.log("Product not found");
