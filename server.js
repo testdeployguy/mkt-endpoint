@@ -145,7 +145,7 @@ app.get("/api/productsDeployed", async (req, res) => {
     const products = await Product.find({ deploy: true });
     if (products) {
       res.status(200).json(products);
-      // console.log("All Product found", products)
+      console.log("All Product found", products);
     }
   } catch (err) {
     console.log("Failed to get blog:", err.message);
