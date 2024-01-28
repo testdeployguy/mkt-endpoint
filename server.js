@@ -159,7 +159,7 @@ app.get("/api/deployedProductDetail/:productId", async (req, res) => {
     const product = await Product.findOne({ _id: productId });
     const productDeployed = product.deploy;
     if (productDeployed) {
-      console.log("Product found", product);
+      // console.log("Product found", product);
       res.status(200).json(product);
     }
     // else {
