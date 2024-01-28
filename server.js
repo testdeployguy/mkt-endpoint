@@ -156,7 +156,7 @@ app.get("/api/productsDeployed", async (req, res) => {
 app.get("/api/deployedProductDetail/:id", async (req, res) => {
   try {
     const productId = req.params.id;
-    const product = await Product.findOne(productId);
+    const product = await Product.findOne({ _id: productId });
     if (product.deploy === true) {
       console.log("Product found", product);
       res.status(200).json(product);
