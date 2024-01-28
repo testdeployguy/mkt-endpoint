@@ -31,7 +31,7 @@ router.get("/getCartItems", async (req, res) => {
       })
     );
 
-    console.log(products.length);
+    // console.log(products.length);
     res.status(200).json(products);
   } catch (err) {
     console.error("Error getting CartItems ", err.message);
